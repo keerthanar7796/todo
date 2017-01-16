@@ -1,4 +1,14 @@
 TodoApp::Application.routes.draw do
+  get "users/new"
+
+  root :to => 'basic_pages#home'
+
+  match '/help', to: "basic_pages#help"
+
+  match '/about', to: "basic_pages#about"
+
+  match '/signup', to: "users#new"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
