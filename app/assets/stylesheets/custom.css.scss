@@ -11,6 +11,10 @@ body {
 	padding-top: 60px;
 }
 
+section {
+	overflow: auto;
+}
+
 .center {
 	text-align: center;
 	background-color: #ffffff;
@@ -29,6 +33,7 @@ h1 {
 	letter-spacing: -2px;
 	margin-bottom: 30px;
 	text-align: center;
+	color: $blueDark;
 }
 
 h2 {
@@ -47,6 +52,13 @@ p {
 
 .btn-primary {
 	background-color: $blueDark;
+}
+
+.navbar-inverse {
+	background-color: $blueDark;
+	.nav > li > a {
+		color: #c4c4c4;
+	}
 }
 
 #logo {
@@ -71,13 +83,43 @@ footer {
 	margin-left: 45px;
 	padding-top: 5px;
 	border-top: 1px solid $grayMediumLight;
-	color: $grayLight;
 	ul {
 		float: right;
 		list-style: none;
 		li {
 			float: left;
 			margin-left: 10px;
+			a {
+				color: $blueDark;
+			}
 		}
 	}
+}
+
+aside {
+	section {
+		padding: 10px 0;
+		/*background-color: #eaeaea;*/
+
+	}
+	h1 {
+		text-align: left;
+	}
+}
+
+input {
+	width: 100%;
+}
+
+#error_explanation {
+	color: #F00;
+	ul {
+		list-style: none;
+		margin: 0 0 18px 0;
+	}
+}
+
+.field_with_errors {
+	@extend .control-group;
+	@extend .error;
 }

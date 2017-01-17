@@ -1,5 +1,5 @@
 TodoApp::Application.routes.draw do
-  get "users/new"
+  resources :users
 
   root :to => 'basic_pages#home'
 
