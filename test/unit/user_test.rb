@@ -69,4 +69,9 @@ class UserTest < ActiveSupport::TestCase
 		@user.password = "pass"
 		assert !@user.save
 	end
+
+  test "remember token should not be empty" do
+    @user.save
+    assert @user.remember_token.length!=0
+  end
 end
