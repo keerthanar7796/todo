@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  description: MyString
+  open: false
+  priority: 1
+  deadline: 2017-01-17 17:35:03
+  reminder: 2017-01-17 17:35:03
+  user_id: 1
+
+two:
+  title: MyString
+  description: MyString
+  open: false
+  priority: 1
+  deadline: 2017-01-17 17:35:03
+  reminder: 2017-01-17 17:35:03
+  user_id: 1

@@ -1,7 +1,16 @@
 class UsersController < ApplicationController
+require 'will_paginate/array'
+require 'date'
+  before_filter :signed_in_user, only: :show
+  before_filter :correct_user, only: :show
 
 	def show
 		@user = User.find(params[:id])
+    @open_tasks = @user.tasks.select{ |task| task.open? }
+    @open_tasks = @open_tasks.paginate(page: params[:page])
+    @done_tasks = @user.tasks.select{ |task| !task.open? }
+    @done_tasks = @done_tasks.paginate(page: params[:page])
+    @task = current_user.tasks.build if signed_in?
 	end
 
   def new
@@ -18,4 +27,11 @@ class UsersController < ApplicationController
   		render 'new'
   	end
   end
+
+  private
+
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to root_url, notice: "Sign out to sign in as another user." unless current_user?
+    end
 end

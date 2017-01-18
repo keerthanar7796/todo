@@ -1,6 +1,9 @@
 TodoApp::Application.routes.draw do
+  get "tasks/new"
+
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :tasks, only: [:create, :destroy]
 
   root :to => 'basic_pages#home'
 

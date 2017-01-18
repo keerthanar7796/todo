@@ -6,3 +6,30 @@
 		</section>
 	</aside>
 </div>
+<div class="row">
+	<aside class="span8">
+		<section class="task_form">
+			<%= render 'shared/task_form' %>
+		</section>
+	</aside>
+</div>
+<div class="row">
+	<aside class="span6">
+		<% if @open_tasks.any? && %>
+			<h3>Open tasks(<%= @open_tasks.count %>)</h3>
+			<ol class="tasks">
+				<%= render @open_tasks %>
+			</ol>
+			<%= will_paginate @open_tasks %>
+		<% end %>
+	</aside>
+	<div class="span6">
+		<% if @done_tasks.any? && %>
+			<h3>Done tasks(<%= @done_tasks.count %>)</h3>
+			<ol class="tasks">
+				<%= render @done_tasks %>
+			</ol>
+			<%= will_paginate @done_tasks %>
+		<% end %>
+	</div>
+</div>

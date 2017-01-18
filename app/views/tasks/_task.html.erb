@@ -1,0 +1,23 @@
+<li>
+	<span class="title"><%= task.title.upcase %></span>
+	<% prio = ""
+		case task.priority 
+		when 1
+			prio = "High"
+		when 2
+			prio = "Medium"
+		when 3
+			prio = "Low"
+		else
+			prio = "No"
+		end
+	%>
+	<span class="priority priority_<%= task.priority %>"><%= prio %> priority</span>
+	<span class="content"><%= task.description %></span>
+	<% dl = task.deadline %>
+	<span class="deadline">To be completed before <%= dl %></span><br>
+	<% rm = task.reminder %>
+	<span class="reminder">Reminder at <%= rm %></span><br>
+	<span class="timestamp">Created at <%= task.created_at %></span><br>
+</li>
+<!-- .strftime("%H:%M on %b %d %Y") -->

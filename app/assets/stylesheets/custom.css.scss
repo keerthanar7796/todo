@@ -123,3 +123,46 @@ input {
 	@extend .control-group;
 	@extend .error;
 }
+
+.tasks {
+	list-style: none;
+	margin: 10px 0 0 0;
+	li {
+		padding: 10px 0;
+		border-top: 1px solid #e8e8e8;
+	}
+}
+
+.title {
+	font-weight: bold;
+}
+
+.priority {
+	font-size: 0.8em;
+}
+
+.priority_1 {
+	color: red;
+}
+
+.priority_2 {
+	color: #ffe500;
+}
+
+.priority_3 {
+	color: green;
+}
+
+.content {
+ 	display: block;
+ 	font-style: italic;
+ 	text-indent: 20px;
+ }
+
+ .deadline, .reminder {
+ 	color: $blueDark;
+ }
+
+ .timestamp {
+ 	color: $grayLight;
+ }
