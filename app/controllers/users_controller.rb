@@ -6,11 +6,11 @@ require 'date'
 
 	def show
 		@user = User.find(params[:id])
+    # binding.pry
     @open_tasks = @user.tasks.select{ |task| task.open? }
-    @open_tasks = @open_tasks.paginate(page: params[:page])
+    @open_tasks = @open_tasks.paginate(page: params[:page], per_page: 7)
     @done_tasks = @user.tasks.select{ |task| !task.open? }
-    @done_tasks = @done_tasks.paginate(page: params[:page])
-    @task = current_user.tasks.build if signed_in?
+    @done_tasks = @done_tasks.paginate(page: params[:page], per_page: 7)
 	end
 
   def new
@@ -32,6 +32,6 @@ require 'date'
 
     def correct_user
       @user = User.find(params[:id])
-      redirect_to root_url, notice: "Sign out to sign in as another user." unless current_user?
+      redirect_to root_url, notice: "Sign out to sign in as another user." unless current_user?(@user)
     end
 end

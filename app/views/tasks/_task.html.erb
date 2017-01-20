@@ -1,5 +1,6 @@
 <li>
 	<span class="title"><%= task.title.upcase %></span>
+
 	<% prio = ""
 		case task.priority 
 		when 1
@@ -13,11 +14,27 @@
 		end
 	%>
 	<span class="priority priority_<%= task.priority %>"><%= prio %> priority</span>
+
 	<span class="content"><%= task.description %></span>
-	<% dl = task.deadline %>
-	<span class="deadline">To be completed before <%= dl %></span><br>
-	<% rm = task.reminder %>
-	<span class="reminder">Reminder at <%= rm %></span><br>
-	<span class="timestamp">Created at <%= task.created_at %></span><br>
+
+	<% unless task.deadline.nil? %>
+		<span class="deadline">To be completed before <b><%= DateTime.parse(task.deadline.to_s).strftime('%H:%M on %b %d %Y') %></b></span><br>
+	<% end %>
+
+	<% unless task.reminder.nil? %>
+		<span class="reminder">Reminder at <b><%= DateTime.parse(task.reminder.to_s).strftime('%H:%M on %b %d %Y') %></b></span><br>
+	<% end %>
+
+	<span class="timestamp">Created at <%= DateTime.parse(task.created_at.to_s).strftime('%H:%M on %b %d %Y') %></span><br>
+	<span class="row">
+		<% if current_user?(@user) %>
+			<% if task.open? %>
+				<%= link_to "Mark Done", markdone_task_path(id: task.id), method: :get, class: "btn btn-small btn-primary" %>
+			<% else %>
+				<%= link_to "Mark Open", markopen_task_path(id: task.id), method: :get, class: "btn btn-small btn-primary" %>
+			<% end %>
+			<%= link_to "Delete", task, method: :delete, data: { confirm: "Delete this task?" }, class: "btn btn-small btn-primary" %>
+		<% end %>
+	</span>
+
 </li>
-<!-- .strftime("%H:%M on %b %d %Y") -->

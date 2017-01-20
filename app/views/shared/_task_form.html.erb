@@ -1,21 +1,27 @@
 <%= form_for(@task) do |f| %>
 	<%= render 'shared/error_messages', object: f.object %>
+	<div class="row">
 
-	<%= f.label :title, "Task name" %>
-	<%= f.text_field :title %>
+		<span class="span4">
+			<%= f.label :title, "Task name" %>
+			<%= f.text_field :title, placeholder: "Add title..." %>
 
-	<%= f.label :description, "Add description" %>
-	<%= f.text_area :description %>
+			<%= f.label :description, "Description" %>
+			<%= f.text_area :description, placeholder: "Add description...", rows: "5" %>
+		</span>
 
-	<%= f.label :priority, "Priority" %>
-	<%= f.text_field :priority %>
+		<span class="span4">
+			<%= f.label :priority, "Priority" %>
+			<%= f.select :priority, [["No priority", "4"], ["High","1"],["Medium","2"],["Low","3"]] %>
 
-	<%= f.label :deadline, "Set deadline" %>
-	<%= f.text_field :deadline %>
+			<%= f.label :deadline, "Deadline" %>
+			<%= f.text_field :deadline, class: "datetimepicker", placeholder: "Set deadline" %>
 
-	<%= f.label :reminder, "Set reminder" %>
-	<%= f.text_field :reminder %>
+			<%= f.label :reminder, "Reminder" %>
+			<%= f.text_field :reminder, class: "datetimepicker", placeholder: "Set reminder" %>
 
-	<%= f.submit "Add task", class: "btn btn-primary btn-large" %>
+			<%= f.submit "Add", class: "btn btn-primary btn-large right_align" %>
+		</span>
+	</div>
 
 <% end %>

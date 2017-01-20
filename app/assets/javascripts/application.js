@@ -12,4 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require moment
+//= require bootstrap
+//= reqiure bootstrap-sprockets
+//= require bootstrap-datetimepicker
 //= require_tree .
+$(function(){
+$('.datetimepicker').datetimepicker({
+	timeFormat: 'HH:MM',
+	dateFormat: 'dd-mm-yyyy'
+});
+})

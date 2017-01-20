@@ -1,2 +1,9 @@
-<h1>Tasks#new</h1>
-<p>Find me in app/views/tasks/new.html.erb</p>
+<%= provide(:title, "Add task") %>
+<h1>New Task</h1>
+<div class="row">
+	<div class="span12">
+		<section>
+			<%= render 'shared/task_form' %>
+		</section>
+	</div>
+</div>

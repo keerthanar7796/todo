@@ -5,18 +5,19 @@
 			<h1><%= @user.name %></h1>
 		</section>
 	</aside>
+	<button class="btn btn-primary dropdown">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Options <b class="caret"></b></a>
+		<ul class="dropdown-menu">
+			<li><%= link_to "Add task...", addtask_path %></li>
+			<li><%= link_to "Edit profile", "#" %></li>
+		</ul>
+	</button>
 </div>
-<div class="row">
-	<aside class="span8">
-		<section class="task_form">
-			<%= render 'shared/task_form' %>
-		</section>
-	</aside>
-</div>
+
 <div class="row">
 	<aside class="span6">
 		<% if @open_tasks.any? && %>
-			<h3>Open tasks(<%= @open_tasks.count %>)</h3>
+			<h3>Open tasks(<%= @open_tasks.total_entries %>)</h3>
 			<ol class="tasks">
 				<%= render @open_tasks %>
 			</ol>
@@ -25,7 +26,7 @@
 	</aside>
 	<div class="span6">
 		<% if @done_tasks.any? && %>
-			<h3>Done tasks(<%= @done_tasks.count %>)</h3>
+			<h3>Done tasks(<%= @done_tasks.total_entries %>)</h3>
 			<ol class="tasks">
 				<%= render @done_tasks %>
 			</ol>

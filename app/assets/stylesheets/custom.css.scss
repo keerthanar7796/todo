@@ -1,4 +1,6 @@
+/*@import "bootstrap-sprockets";*/
 @import "bootstrap";
+@import "bootstrap-datetimepicker";
 
 $blueDark: #0D47A1;
 $grayMediumLight: #eaeaea;
@@ -51,6 +53,7 @@ p {
 }
 
 .btn-primary {
+	color: white;
 	background-color: $blueDark;
 }
 
@@ -96,14 +99,28 @@ footer {
 	}
 }
 
+.btn > a {
+	color: inherit;
+	&:hover {
+		color: white;
+		text-decoration: none;
+	}
+}
+
+a {
+	
+}
+
 aside {
 	section {
 		padding: 10px 0;
 		/*background-color: #eaeaea;*/
-
 	}
 	h1 {
 		text-align: left;
+	}
+	.span4 {
+		display: inline-block;
 	}
 }
 
@@ -165,4 +182,29 @@ input {
 
  .timestamp {
  	color: $grayLight;
+ }
+
+ label, input, textarea {
+ 	/*width: 30%;*/
+ 	width: 100%;
+ 	display: inline-block;
+ 	margin-left: 0px;
+ }
+
+ span.span4 {
+ 	margin-right: 150px;
+ }
+
+ .right_align {
+ 	float: right;
+ 	margin-right: -30px;
+ 	margin-top: 20px;
+ }
+
+ button {
+ 	margin-top: 25px;
+ }
+
+ .btn-small {
+ 	margin-right: 8px;
  }

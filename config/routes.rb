@@ -3,7 +3,11 @@ TodoApp::Application.routes.draw do
 
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  resources :tasks, only: [:create, :destroy]
+  resources :tasks, only: [:create, :destroy] do
+    member do
+      get 'markdone','markopen'
+    end
+  end
 
   root :to => 'basic_pages#home'
 
@@ -16,6 +20,8 @@ TodoApp::Application.routes.draw do
   match '/signin', to: "sessions#new"
 
   match '/signout', to: "sessions#destroy", via: :delete
+
+  match '/addtask', to: "tasks#new"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
