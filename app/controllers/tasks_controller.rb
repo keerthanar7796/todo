@@ -1,7 +1,6 @@
 class TasksController < ApplicationController
-  before_filter :signed_in_user, only: [:create, :destroy, :markdone, :markopen]
-  before_filter :correct_user, only: [:destroy, :markdone, :markopen]
-  # helper_method :markdone
+  before_filter :signed_in_user, only: [:create, :destroy, :markdone, :markopen, :edit, :update]
+  before_filter :correct_user, only: [:destroy, :markdone, :markopen, :edit, :update]
 
   def new
     @task = current_user.tasks.build if signed_in?
@@ -21,6 +20,20 @@ class TasksController < ApplicationController
     @task.destroy
     flash[:success] = "Task deleted."
     redirect_to user_path(current_user)
+  end
+
+  def edit
+  end
+
+  def update
+    binding.pry
+    if @task.update_attributes(params[:task])
+      flash[:success] = "Task updated!"
+      redirect_to user_path(current_user)
+    else
+      Rails.logger.info(@task.errors.messages.inspect)
+      render 'edit'
+    end
   end
 
   def markdone

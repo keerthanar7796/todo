@@ -26,14 +26,23 @@
 	<% end %>
 
 	<span class="timestamp">Created at <%= DateTime.parse(task.created_at.to_s).strftime('%H:%M on %b %d %Y') %></span><br>
+
 	<span class="row">
 		<% if current_user?(@user) %>
 			<% if task.open? %>
+
 				<%= link_to "Mark Done", markdone_task_path(id: task.id), method: :get, class: "btn btn-small btn-primary" %>
+
 			<% else %>
+
 				<%= link_to "Mark Open", markopen_task_path(id: task.id), method: :get, class: "btn btn-small btn-primary" %>
+
 			<% end %>
+
+			<%= link_to "Edit task", edit_task_path(id: task.id), method: :get, class: "btn btn-small btn-primary" %>
+
 			<%= link_to "Delete", task, method: :delete, data: { confirm: "Delete this task?" }, class: "btn btn-small btn-primary" %>
+			
 		<% end %>
 	</span>
 

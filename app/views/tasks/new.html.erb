@@ -3,7 +3,17 @@
 <div class="row">
 	<div class="span12">
 		<section>
-			<%= render 'shared/task_form' %>
+			<%= form_for(@task) do |f| %>
+
+				<%= render 'shared/error_messages', object: f.object %>
+
+				<div class="row">
+
+					<%= render 'taskfields', f: f %>
+
+					<%= f.submit "Add", class: "btn btn-primary btn-large right_align" %>
+				</div>
+			<% end %>
 		</section>
 	</div>
 </div>

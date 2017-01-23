@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 require 'will_paginate/array'
 require 'date'
-  before_filter :signed_in_user, only: :show
-  before_filter :correct_user, only: :show
+  before_filter :signed_in_user, only: [:show, :edit, :update]
+  before_filter :correct_user, only: [:show, :edit, :update]
 
 	def show
 		@user = User.find(params[:id])
@@ -26,6 +26,19 @@ require 'date'
   	else
   		render 'new'
   	end
+  end
+
+  def edit
+  end
+
+  def update
+    if @user.update_attributes(params[:user])
+      sign_in @user
+      flash[:success] = "Profile updated!"
+      redirect_to @user
+    else
+      render 'edit'
+    end
   end
 
   private

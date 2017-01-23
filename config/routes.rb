@@ -3,9 +3,9 @@ TodoApp::Application.routes.draw do
 
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  resources :tasks, only: [:create, :destroy] do
+  resources :tasks, only: [:create, :destroy, :update] do
     member do
-      get 'markdone','markopen'
+      get 'edit','markdone','markopen'
     end
   end
 
