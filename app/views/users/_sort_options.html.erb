@@ -1,0 +1,17 @@
+<% sort_hash = {
+	"priority" => "Highest priority first",
+	"deadline" => "Earliest deadline first",
+	"" => "Most recent first"
+}		
+%>
+
+<label class="sort_row">Showing: </label>
+<%= sort_hash[@user.sort_by] %>
+
+<label class="sort_buttons_group">Show:
+	<%= link_to sort_hash["priority"], sort_user_path(sort_by: "priority"), class: "btn btn-xs btn-default" %>
+
+	<%= link_to sort_hash["deadline"], sort_user_path(sort_by: "deadline"), class: "btn btn-xs btn-default" %>
+
+	<%= link_to sort_hash[""], sort_user_path(sort_by: ""), class: "btn btn-xs btn-default" %>
+</label>

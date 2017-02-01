@@ -1,14 +1,14 @@
 class UsersController < ApplicationController
 require 'will_paginate/array'
 require 'date'
-  before_filter :signed_in_user, only: [:show, :edit, :update, :settings]
-  before_filter :correct_user, only: [:show, :edit, :update, :settings]
+  before_filter :signed_in_user, only: [:show, :edit, :update]
+  before_filter :correct_user, only: [:show, :edit, :update]
 
 	def show
 		@user = User.find(params[:id])
     msg = $redis.get("messages:#{@user.id}")
-    $redis.del("messages:#{@user.id}")
     flash[:info] = msg if !msg.nil?
+    $redis.del("messages:#{@user.id}")
     sort_order = "#{@user.sort_by}"
     sort_order += " ASC, " if @user.sort_by != ""
     @open_tasks = @user.tasks.order("#{sort_order}updated_at DESC").select{ |task| task.open? }

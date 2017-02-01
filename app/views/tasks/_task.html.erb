@@ -1,33 +1,38 @@
+<% priority = ""
+		case task.priority 
+		when 1
+			priority = "High"
+		when 2
+			priority = "Medium"
+		when 3
+			priority = "Low"
+		else
+			priority = "No"
+		end
+%>
+
+<% def readable(datetime)
+	return DateTime.parse(datetime.to_s).strftime('%I:%M %p on %b %d %Y')
+end %>
+
 <li>
 	<span class="title"><%= task.title.upcase %></span>
 
-	<% prio = ""
-		case task.priority 
-		when 1
-			prio = "High"
-		when 2
-			prio = "Medium"
-		when 3
-			prio = "Low"
-		else
-			prio = "No"
-		end
-	%>
-	<span class="priority priority_<%= task.priority %>"><%= prio %> priority</span>
+	<span class="priority priority_<%= task.priority %>"><%= priority %> priority</span>
 
 	<span class="content"><%= task.description %></span>
 
 	<% unless task.deadline.nil? %>
-		<span class="deadline">To be completed before <b><%= DateTime.parse(task.deadline.to_s).strftime('%I:%M %p on %b %d %Y') %></b></span><br>
+		<span class="deadline">To be completed before <b><%= readable task.deadline %></b></span><br>
 	<% end %>
 
 	<% unless task.reminder.nil? %>
-		<span class="reminder">Reminder at <b><%= DateTime.parse(task.reminder.to_s).strftime('%I:%M %p on %b %d %Y') %></b></span><br>
+		<span class="reminder">Reminder at <b><%= readable task.reminder %></b></span><br>
 	<% end %>
 
-	<span class="timestamp">Created at <%= DateTime.parse(task.created_at.to_s).strftime('%I:%M %p on %b %d %Y') %></span><br>
+	<span class="timestamp">Created at <%= readable task.created_at %></span><br>
 
-	<span class="timestamp">Updated at <%= DateTime.parse(task.updated_at.to_s).strftime('%I:%M %p on %b %d %Y') %></span><br>
+	<span class="timestamp">Updated at <%= readable task.updated_at %></span><br>
 
 	<span class="row">
 		<% if current_user?(@user) %>
@@ -40,11 +45,11 @@
 				<%= link_to "Mark Open", markopen_task_path(id: task.id), method: :get, class: "btn btn-xs btn-primary" %>
 
 			<% end %>
-
+			
 			<%= link_to "Edit task", edit_task_path(id: task.id), method: :get, class: "btn btn-xs btn-primary" %>
 
 			<%= link_to "Delete", task, method: :delete, data: { confirm: "Delete this task?" }, class: "btn btn-xs btn-primary" %>
-			
+
 		<% end %>
 	</span>
 

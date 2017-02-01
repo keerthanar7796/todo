@@ -20,11 +20,9 @@
 //= require_tree .
 $(document).ready(function(){
 $('#datetimepicker').datetimepicker({
-	// defaultDate: new Date(),
 	format: 'DD-MM-YYYY hh:mm A'
 });
 $('#datetimepicker1').datetimepicker({
-	// defaultDate: new Date(),
 	format: 'DD-MM-YYYY hh:mm A'
 });
 $('.dropdown-toggle').dropdown();

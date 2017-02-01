@@ -2,17 +2,18 @@ class Task < ActiveRecord::Base
   attr_accessible :deadline, :description, :open, :priority, :reminder, :title, :user_id, :email_reminder
   belongs_to :user
 
+  before_save { |task| task.title = task.title.capitalize }
+
   validates :user_id, presence: true
-  validates :title, presence:true, length: { maximum: 50 }
+  validates :title, presence: true, length: { maximum: 50 }, uniqueness: {case_sensitive: false }
   validates :description, length: { maximum: 150 }
   validates :open, inclusion: { in: [true, false] }
   validates_datetime :reminder, after: lambda { DateTime.current }, if: lambda { |task| task.reminder.present? }
   validates_datetime :deadline, after: lambda { DateTime.current }, if: lambda { |task| task.deadline.present? }
 
-  # default_scope order: 'updated_at DESC'
 
-  after_save :send_reminder_email, on: [:create, :update], if: lambda { |task| task.reminder.present? } && :open && :email_reminder
-  after_save :display_reminder_notification, on: [:create, :update], if: lambda { |task| task.reminder.present? } && :open
+  after_save :send_reminder_email, on: [:create, :update], if: lambda { |task| task.reminder.present? && task.open && task.email_reminder }
+  after_save :display_reminder_notification, on: [:create, :update], if: lambda { |task| task.reminder.present? && task.open && task.email_reminder }
 
   def send_reminder_email
   	delay_interval = reminder - DateTime.now
@@ -25,11 +26,11 @@ class Task < ActiveRecord::Base
   end
 
   def self.as_csv
-    atrbts = %w{title description deadline}
+    columns = %w{title description deadline open}
     CSV.generate(headers: true) do |csv|
-      csv << atrbts
+      csv << columns.collect { |column| column.capitalize }
       all.each do |task|
-        csv << task.attributes.values_at(*atrbts)
+        csv << task.attributes.values_at(*columns)
       end
     end
   end

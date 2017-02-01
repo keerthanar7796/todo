@@ -5,32 +5,10 @@
 			<h1><%= @user.name %></h1>
 		</section>
 	</aside>
-	<button class="btn btn-primary dropdown options_menu">
-		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Options <b class="caret"></b></a>
-		<ul class="dropdown-menu">
-			<li><%= link_to "Add task...", addtask_path %></li>
-			<li><%= link_to "Edit profile", edit_user_path %></li>
-			<li><%= link_to "More..", more_options_user_path %></li>
-		</ul>
-	</button>
-	
+	<%= render 'user_options' %>
 </div>
-<% sort_hash = {
-	"priority" => "Highest priority first",
-	"deadline" => "Earliest deadline first",
-	"" => "Most recent first"
-}		
-%>
 <div>
-	<label style="display: inline;">Showing: </label>
-		<%= sort_hash[@user.sort_by] %>
-	<label class="sort_buttons_group">Show:
-	<%= link_to sort_hash["priority"], sort_user_path(sort_by: "priority"), class: "btn btn-xs btn-default" %>
-
-	<%= link_to sort_hash["deadline"], sort_user_path(sort_by: "deadline"), class: "btn btn-xs btn-default" %>
-
-	<%= link_to sort_hash[""], sort_user_path(sort_by: ""), class: "btn btn-xs btn-default" %>
-	</label>
+	<%= render 'sort_options' %>
 </div>
 
 <div class="row">

@@ -1,5 +1,7 @@
 <% if signed_in? %>
-	
+	<div class="center">
+		<%= link_to "Click here to go to your profile!", user_path(current_user) %>
+	</div>
 <% else %>
 	<div class="center jumbotron">
 		<h1>Welcome to the Todo app!</h1>

@@ -8,7 +8,6 @@ class TasksController < ApplicationController
 
   def create
   	@task = current_user.tasks.build(params[:task])
-    binding.pry
   	if @task.save
   		flash[:success] = "Task added!"
   		redirect_to user_path(current_user)
