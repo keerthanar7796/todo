@@ -12,14 +12,20 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require moment
 //= require bootstrap
 //= reqiure bootstrap-sprockets
 //= require bootstrap-datetimepicker
 //= require_tree .
-$(function(){
-$('.datetimepicker').datetimepicker({
-	timeFormat: 'HH:MM',
-	dateFormat: 'dd-mm-yyyy'
+$(document).ready(function(){
+$('#datetimepicker').datetimepicker({
+	// defaultDate: new Date(),
+	format: 'DD-MM-YYYY hh:mm A'
 });
-})
+$('#datetimepicker1').datetimepicker({
+	// defaultDate: new Date(),
+	format: 'DD-MM-YYYY hh:mm A'
+});
+$('.dropdown-toggle').dropdown();
+});

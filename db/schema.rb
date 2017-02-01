@@ -11,18 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170119112224) do
+ActiveRecord::Schema.define(:version => 20170127073810) do
 
   create_table "tasks", :force => true do |t|
     t.string   "title"
     t.string   "description"
-    t.boolean  "open",                       :default => true
-    t.integer  "priority",                   :default => 4
-    t.datetime "deadline",    :limit => 255
-    t.datetime "reminder",    :limit => 255
+    t.boolean  "open",                          :default => true
+    t.integer  "priority",                      :default => 4
+    t.datetime "deadline",       :limit => 255
+    t.datetime "reminder",       :limit => 255
     t.integer  "user_id"
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
+    t.boolean  "email_reminder"
   end
 
   create_table "users", :force => true do |t|
@@ -32,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20170119112224) do
     t.datetime "updated_at",      :null => false
     t.string   "password_digest"
     t.string   "remember_token"
+    t.string   "sort_by"
   end
 
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"

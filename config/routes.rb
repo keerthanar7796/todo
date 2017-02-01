@@ -1,9 +1,16 @@
 TodoApp::Application.routes.draw do
   get "tasks/new"
 
-  resources :users
+  resources :users do
+    member do
+      get 'more_options', 'sort'
+    end
+  end
   resources :sessions, only: [:new, :create, :destroy]
-  resources :tasks, only: [:create, :destroy, :update] do
+  resources :tasks, only: [:create, :destroy, :update, :index] do
+    collection do
+      get 'mail_csv', 'mail_xml'
+    end
     member do
       get 'edit','markdone','markopen'
     end
@@ -22,6 +29,8 @@ TodoApp::Application.routes.draw do
   match '/signout', to: "sessions#destroy", via: :delete
 
   match '/addtask', to: "tasks#new"
+
+  # match '/downloadtasks', to: "tasks#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

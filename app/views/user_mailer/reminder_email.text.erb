@@ -1,0 +1,17 @@
+<% prio = ""
+		case @task["priority"] 
+		when 1
+			prio = "High priority"
+		when 2
+			prio = "Medium priority"
+		when 3
+			prio = "Low priority"
+		end
+	%>
+Hey <%= @user["name"] %>
+
+This is a reminder to complete your <i><%= prio %></i> task- <%= @task["title"] %> before <%= DateTime.parse(@task["deadline"].to_s).strftime('%I:%M %p on %b %d %Y') %>. If you have completed the task, move it to your done list.
+
+You are receiving this mail since you've opted for receiving reminders via email. To stop receiving reminders via email, uncheck the "Receive reminder via email" box in Edit Task page.
+
+Have a good day!

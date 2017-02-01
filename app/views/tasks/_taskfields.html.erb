@@ -1,4 +1,4 @@
-<span class="span4">
+<span class="col-md-4">
 	<%= f.label :title, "Task name" %>
 	<%= f.text_field :title, placeholder: "Add title..." %>
 
@@ -6,13 +6,27 @@
 	<%= f.text_area :description, placeholder: "Add description...", rows: "5" %>
 </span>
 
-<span class="span4">
+<span class="col-md-4">
 	<%= f.label :priority, "Priority" %>
 	<%= f.select :priority, [["No priority", "4"], ["High","1"],["Medium","2"],["Low","3"]] %>
 
-	<%= f.label :deadline, "Deadline" %>
-	<%= f.text_field :deadline, class: "datetimepicker", placeholder: "Set deadline" %>
+	<div class="form-group">
+      <%= f.label :deadline, 'Deadline' %>
+      <div class="input-group date" id="datetimepicker">
+        <%= f.text_field :deadline, class: "form-control", value: @task.deadline.strftime("%d-%m-%Y %I:%M %p") unless @task.deadline.nil? %>
+        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+      </div>
+    </div>
 
-	<%= f.label :reminder, "Reminder" %>
-	<%= f.text_field :reminder, class: "datetimepicker", placeholder: "Set reminder" %>
+    <div class="form-group">
+      <%= f.label :reminder, 'Reminder' %>
+      <div class="input-group date" id="datetimepicker1">
+        <%= f.text_field :reminder, class: "form-control", value: @task.reminder.strftime("%d-%m-%Y %I:%M %p") unless @task.reminder.nil? %>
+        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+      </div>
+    </div>
+	
+	<%= f.label :email_reminder do %>
+		<%= f.check_box :email_reminder %> Receive reminder via email
+	<% end %>
 </span>

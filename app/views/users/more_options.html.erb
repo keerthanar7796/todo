@@ -1,0 +1,10 @@
+<%= provide(:title,"More Options") %>
+<h1>More Options</h1>
+<div class="row">
+	<div class="col-md-12 center">
+		<%= link_to "Download all tasks as CSV", tasks_path(format: "csv"), class: "btn btn-primary btn-xl" %>
+		<%= link_to "Download all tasks as XML", tasks_path(format: "xml"), class: "btn btn-primary btn-xl" %>
+		<%= link_to "Email all tasks as CSV", mail_csv_tasks_path, class: "btn btn-primary btn-xl" %>
+		<%= link_to "Email all tasks as XML", mail_xml_tasks_path, class: "btn btn-primary btn-xl" %>
+	</div>
+</div>

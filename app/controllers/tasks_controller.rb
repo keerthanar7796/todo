@@ -8,6 +8,7 @@ class TasksController < ApplicationController
 
   def create
   	@task = current_user.tasks.build(params[:task])
+    binding.pry
   	if @task.save
   		flash[:success] = "Task added!"
   		redirect_to user_path(current_user)
@@ -26,7 +27,6 @@ class TasksController < ApplicationController
   end
 
   def update
-    binding.pry
     if @task.update_attributes(params[:task])
       flash[:success] = "Task updated!"
       redirect_to user_path(current_user)
@@ -46,6 +46,30 @@ class TasksController < ApplicationController
     @task.update_attribute(:open, true)
     flash[:success] = "Task marked as open!"
     redirect_to user_path(current_user)
+  end
+
+  def index
+    @user = current_user
+    @tasks = @user.tasks
+    respond_to do |format|
+      format.html
+      format.xml { send_data @tasks.to_xml }
+      format.csv { send_data @tasks.as_csv, disposition: 'attachment', type: 'text/csv' }
+    end
+  end
+
+  def mail_csv
+    @user = current_user
+    SendMail.perform_async(@user.attributes, "tasks_csv_email")
+    flash[:success] = "Your mail is on the way!"
+    redirect_to :back
+  end
+
+  def mail_xml
+    @user = current_user
+    SendMail.perform_async(@user.attributes, "tasks_xml_email")
+    flash[:success] = "Your mail is on the way!"
+    redirect_to :back
   end
 
   private

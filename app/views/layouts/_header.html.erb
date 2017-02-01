@@ -1,8 +1,8 @@
-<header class="navbar navbar-inverse navbar-fixed-top">
+<header class="navbar navbar-inverse navbar-static-top">
 	<div class="container">
 		<%= link_to "Todo App", "#", id: "logo" %>
 		<nav>
-			<ul class="nav pull-right">
+			<ul class="nav navbar-nav navbar-right">
 				<% if signed_in? %>
 					<li><%= link_to "Home", user_path(current_user.id) %></li>
 				<% else %>

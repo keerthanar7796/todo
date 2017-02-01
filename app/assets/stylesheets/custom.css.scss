@@ -1,20 +1,17 @@
-/*@import "bootstrap-sprockets";*/
+@import "bootstrap-sprockets";
 @import "bootstrap";
 @import "bootstrap-datetimepicker";
 
 $blueDark: #0D47A1;
 $grayMediumLight: #eaeaea;
+$gray-light: #777;
 
 html {
 	overflow-y: scroll;
 }
 
-body {
-	padding-top: 60px;
-}
-
 section {
-	overflow: auto;
+	overflow: visible;
 }
 
 .center {
@@ -73,7 +70,6 @@ p {
 	letter-spacing: -1px;
 	padding-top: 9px;
 	font-weight: bold;
-	line-height: 1;
 	&:hover {
 		color: #64B5F6;
 		text-decoration: none;
@@ -99,6 +95,11 @@ footer {
 	}
 }
 
+.user_forms {
+	margin: 0 auto;
+	width: 45%;
+}
+
 .btn > a {
 	color: inherit;
 	&:hover {
@@ -107,25 +108,13 @@ footer {
 	}
 }
 
-a {
-	
-}
-
 aside {
 	section {
 		padding: 10px 0;
-		/*background-color: #eaeaea;*/
 	}
 	h1 {
 		text-align: left;
 	}
-	.span4 {
-		display: inline-block;
-	}
-}
-
-input {
-	width: 100%;
 }
 
 #error_explanation {
@@ -137,13 +126,12 @@ input {
 }
 
 .field_with_errors {
-	@extend .control-group;
-	@extend .error;
+	@extend .has-error;
+	/*@extend .error;*/
 }
 
 .tasks {
 	list-style: none;
-	margin: 10px 0 0 0;
 	li {
 		padding: 10px 0;
 		border-top: 1px solid #e8e8e8;
@@ -181,29 +169,40 @@ input {
  }
 
  .timestamp {
- 	color: $grayLight;
+ 	color: $gray-light;
  }
 
  label, input, textarea {
- 	/*width: 30%;*/
  	width: 100%;
  	display: inline-block;
- 	margin-left: 0px;
  }
 
- span.span4 {
- 	margin-right: 150px;
- }
+ input, select {
+	margin-bottom: 15px;
+}
 
  .right_align {
- 	float: right;
  	margin-top: 20px;
+ 	width: 20%;
  }
 
- button {
- 	margin-top: 25px;
+ .options_menu {
+ 	margin-top: 35px;
  }
 
- .btn-small {
- 	margin-right: 8px;
+ span.col-md-4 {
+ 	margin-right: 20px;
+ }
+
+ label > input {
+ 	width: 20px;
+ 	display: inline;
+ }
+
+ .btn-default {
+ 	margin-left: 7px;
+ }
+
+ .sort_buttons_group {
+ 	margin-top: 5px;
  }

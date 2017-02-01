@@ -1,0 +1,6 @@
+development:
+  :concurrency: 5
+  :timeout: 30
+  :queues:
+    - [send_mail]
+    - [display_notif]
