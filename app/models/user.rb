@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :name, :password, :password_confirmation, :sort_by
   has_secure_password
-  has_many :tasks, dependent: :destroy
+  has_many :tasks, dependent: :delete_all
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   before_save { |user| user.email = email.downcase }

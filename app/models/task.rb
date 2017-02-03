@@ -2,7 +2,7 @@ class Task < ActiveRecord::Base
   attr_accessible :deadline, :description, :open, :priority, :reminder, :title, :user_id, :email_reminder
   belongs_to :user
 
-  before_save { |task| task.title = task.title.capitalize }
+  before_save { |task| task.title = task.title.slice(0,1).capitalize + task.title.slice(1..-1) }
 
   validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: 50 }, uniqueness: { case_sensitive: false, scope: :user_id }

@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 require 'will_paginate/array'
 require 'date'
-  before_filter :signed_in_user, only: [:show, :edit, :update]
-  before_filter :correct_user, only: [:show, :edit, :update]
+  before_filter :signed_in_user, only: [:show, :edit, :update, :destroy]
+  before_filter :correct_user, only: [:show, :edit, :update, :destroy]
 
 	def show
 		@user = User.find(params[:id])
@@ -58,6 +58,13 @@ require 'date'
     sign_in @user
     show
     render 'show'
+  end
+
+  def destroy
+    @user.destroy
+    sign_out
+    flash[:success] = "You have successfully deleted your account."
+    redirect_to root_url
   end
 
   def more_options

@@ -30,6 +30,8 @@ TodoApp::Application.routes.draw do
 
   match '/addtask', to: "tasks#new"
 
+  match '/deleteuser', to: "users#destroy", via: :delete
+
   # match '/downloadtasks', to: "tasks#index"
 
   # The priority is based upon order of creation:

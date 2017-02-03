@@ -59,14 +59,14 @@ class TasksController < ApplicationController
 
   def mail_csv
     @user = current_user
-    SendMail.perform_async(@user.attributes, "tasks_csv_email")
+    SendMail.perform_async(@user.id, "tasks_csv_email")
     flash[:success] = "Your mail is on the way!"
     redirect_to :back
   end
 
   def mail_xml
     @user = current_user
-    SendMail.perform_async(@user.attributes, "tasks_xml_email")
+    SendMail.perform_async(@user.id, "tasks_xml_email")
     flash[:success] = "Your mail is on the way!"
     redirect_to :back
   end

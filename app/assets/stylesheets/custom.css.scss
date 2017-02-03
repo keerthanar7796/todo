@@ -217,3 +217,13 @@ aside {
  #task_email_reminder {
  	width: 20px;
  }
+
+ /* delete account */
+ .delete_button {
+ 	background-color: #A50B0B;
+ 	border-style: none;
+ 	margin-top: 50px;
+ 	&:hover{
+ 		background-color: #A83737;
+ 	}
+ }
