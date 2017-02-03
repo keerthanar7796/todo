@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_filter :signed_in_user, only: [:create, :destroy, :markdone, :markopen, :edit, :update]
+  before_filter :signed_in_user, only: [:new, :create, :destroy, :markdone, :markopen, :edit, :update]
   before_filter :correct_user, only: [:destroy, :markdone, :markopen, :edit, :update]
 
   def new

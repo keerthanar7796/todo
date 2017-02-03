@@ -10,7 +10,7 @@
 	%>
 Hey <%= @user["name"] %>
 
-This is a reminder to complete your <i><%= prio %></i> task- <%= @task["title"] %> before <%= DateTime.parse(@task["deadline"].to_s).strftime('%I:%M %p on %b %d %Y') %>. If you have completed the task, move it to your done list.
+This is a reminder to complete your <i><%= prio %></i> task- <%= @task["title"] %> before <%= @task["deadline"].strftime('%I:%M %p on %b %d %Y') %>. If you have completed the task, move it to your done list.
 
 You are receiving this mail since you've opted for receiving reminders via email. To stop receiving reminders via email, uncheck the "Receive reminder via email" box in Edit Task page.
 

@@ -3,10 +3,13 @@ class DisplayNotif
 
   sidekiq_options queue: :display_notif, retry: 2, backtrace: true, failures: :exhaust
 
-  def perform task, type
-  	@task = task
-  	user = User.find_by_id(task["user_id"])
-    message = "Reminder: Complete task \"#{@task["title"]}\" before #{DateTime.parse(@task["deadline"].to_s).strftime('%I:%M %p on %b %d %Y')}!"
-    $redis.set("messages:#{user.id}", message)
+  def perform task_id, updated_at
+  	@task = Task.find_by_id(task_id)
+  	if updated_at.to_datetime.to_i != @task.updated_at.to_i
+  		return
+  	end
+  	@user = User.find_by_id(@task.user_id)
+    message = "#{task_id}"
+    $redis.sadd("messages:#{@user.id}", message)
   end
 end

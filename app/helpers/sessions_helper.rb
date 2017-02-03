@@ -5,13 +5,13 @@ module SessionsHelper
 	end
 
 	def signed_in?
-		!current_user.nil?
+		current_user.present?
 	end
 
 	def signed_in_user
       unless signed_in?
         store_location
-        redirect_to signin_url, warning: "Please sign in!"
+        redirect_to signin_url, flash: { warning: "Please sign in!" }
       end
     end
 

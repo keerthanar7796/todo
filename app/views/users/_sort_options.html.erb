@@ -1,7 +1,7 @@
 <% sort_hash = {
 	"priority" => "Highest priority first",
 	"deadline" => "Earliest deadline first",
-	"" => "Most recent first"
+	nil => "Most recent first"
 }		
 %>
 
@@ -13,5 +13,5 @@
 
 	<%= link_to sort_hash["deadline"], sort_user_path(sort_by: "deadline"), class: "btn btn-xs btn-default" %>
 
-	<%= link_to sort_hash[""], sort_user_path(sort_by: ""), class: "btn btn-xs btn-default" %>
+	<%= link_to sort_hash[nil], sort_user_path(sort_by: nil), class: "btn btn-xs btn-default" %>
 </label>

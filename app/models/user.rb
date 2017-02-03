@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   after_commit :send_welcome_email, on: :create
 
   def send_welcome_email
-    SendMail.perform_async(self.attributes, 'welcome_email')
+    SendMail.perform_async(self.id, 'welcome_email')
   end
 
   private

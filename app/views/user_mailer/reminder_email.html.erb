@@ -10,7 +10,7 @@
 		end
 	%>
 <p>
-	This is a reminder to complete your <i><%= prio %></i> task- <b><%= @task["title"] %></b> before <i><%= DateTime.parse(@task["deadline"].to_s).strftime('%I:%M %p on %b %d %Y') %></i>. If you have completed the task, move it to your done list.
+	This is a reminder to complete your <i><%= prio %></i> task- <b><%= @task["title"] %></b> before <i><%= @task["deadline"].strftime('%I:%M %p on %b %d %Y') %></i>. If you have completed the task, move it to your done list.
 </p>
 <p>You are receiving this mail since you've opted for receiving reminders via email. To stop receiving reminders via email, uncheck the "Receive reminder via email" box in Edit Task page. </p>
 <p>Have a good day!</p>

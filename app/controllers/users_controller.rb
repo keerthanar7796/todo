@@ -6,11 +6,15 @@ require 'date'
 
 	def show
 		@user = User.find(params[:id])
-    msg = $redis.get("messages:#{@user.id}")
-    flash[:info] = msg if !msg.nil?
-    $redis.del("messages:#{@user.id}")
+    reminder_tasks = $redis.smembers "messages:#{@user.id}"
+    reminder_tasks.each do |task_id|
+      task = Task.find_by_id(task_id)
+      flash[:info] ||= []
+      flash[:info] << "Reminder: Complete task \"#{task.title}\" before #{task.deadline.strftime('%I:%M %p on %b %d %Y')}!"
+      $redis.srem("messages:#{@user.id}", task_id)
+    end
     sort_order = "#{@user.sort_by}"
-    sort_order += " ASC, " if @user.sort_by != ""
+    sort_order += " ASC, " if @user.sort_by != nil
     @open_tasks = @user.tasks.order("#{sort_order}updated_at DESC").select{ |task| task.open? }
     @open_tasks = @open_tasks.paginate(page: params[:page], per_page: 7)
     @done_tasks = @user.tasks.order("#{sort_order}updated_at DESC").select{ |task| !task.open? }
@@ -18,6 +22,9 @@ require 'date'
 	end
 
   def new
+    if signed_in?
+      redirect_to root_url, flash: { warning: "Sign out before you sign up as new user!" }
+    end
   	@user = User.new
   end
 
@@ -49,7 +56,8 @@ require 'date'
     @user = current_user
     @user.update_attribute(:sort_by, params[:sort_by])
     sign_in @user
-    redirect_to @user
+    show
+    render 'show'
   end
 
   def more_options

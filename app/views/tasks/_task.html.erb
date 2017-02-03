@@ -12,7 +12,7 @@
 %>
 
 <% def readable(datetime)
-	return DateTime.parse(datetime.to_s).strftime('%I:%M %p on %b %d %Y')
+	return datetime.strftime('%I:%M %p on %b %d %Y')
 end %>
 
 <li>
