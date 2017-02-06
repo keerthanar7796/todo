@@ -1,0 +1,17 @@
+<% sort_hash = {
+	"priority" => "Highest priority first",
+	"deadline" => "Earliest deadline first",
+	nil => "Most recent first"
+}		
+%>
+
+<label class="sort_row">Showing: </label>
+<%= sort_hash[params[:sort_by]] %>
+
+<label class="sort_buttons_group">Show:
+	<%= link_to sort_hash["priority"], tasks_path(sort_by: "priority"), class: "btn btn-xs btn-default" %>
+
+	<%= link_to sort_hash["deadline"], tasks_path(sort_by: "deadline"), class: "btn btn-xs btn-default" %>
+
+	<%= link_to sort_hash[nil], tasks_path(sort_by: nil), class: "btn btn-xs btn-default" %>
+</label>

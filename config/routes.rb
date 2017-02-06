@@ -1,15 +1,11 @@
 TodoApp::Application.routes.draw do
   get "tasks/new"
 
-  resources :users do
-    member do
-      get 'more_options', 'sort'
-    end
-  end
+  resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :tasks, only: [:create, :destroy, :update, :index] do
     collection do
-      get 'mail_csv', 'mail_xml'
+      get 'mail_csv', 'mail_xml', 'more_options'
     end
     member do
       get 'edit','markdone','markopen'

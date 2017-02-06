@@ -4,7 +4,7 @@
 		<nav>
 			<ul class="nav navbar-nav navbar-right">
 				<% if signed_in? %>
-					<li><%= link_to "Home", user_path(current_user.id) %></li>
+					<li><%= link_to "Home", tasks_path %></li>
 				<% else %>
 					<li><%= link_to "Home", root_path %></li>
 				<% end %>

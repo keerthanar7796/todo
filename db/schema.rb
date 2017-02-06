@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170127073810) do
+ActiveRecord::Schema.define(:version => 20170206070654) do
 
   create_table "tasks", :force => true do |t|
     t.string   "title"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(:version => 20170127073810) do
     t.datetime "updated_at",      :null => false
     t.string   "password_digest"
     t.string   "remember_token"
-    t.string   "sort_by"
   end
 
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"

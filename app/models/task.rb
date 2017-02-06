@@ -1,5 +1,8 @@
 class Task < ActiveRecord::Base
+  include ActiveModel::Dirty
+
   attr_accessible :deadline, :description, :open, :priority, :reminder, :title, :user_id, :email_reminder
+  attr_accessible :sort_by
   belongs_to :user
 
   before_save { |task| task.title = task.title.slice(0,1).capitalize + task.title.slice(1..-1) }
@@ -13,15 +16,22 @@ class Task < ActiveRecord::Base
   end
   validates_datetime :reminder, before: lambda { :deadline }, if: lambda { |task| task.deadline.present? && task.reminder.present? }
 
-  after_save :send_reminder_email, on: [:create, :update], if: lambda { |task| task.email_reminder && task.open && task.reminder.present? }
-  after_save :display_reminder_notification, on: [:create, :update], if: lambda { |task| task.open && task.reminder.present? }
+
+  after_save :send_reminder_email, on: [:create, :update], if: lambda { |task| task.reminder_changed? && task.email_reminder && task.open && task.reminder.present? }
+  after_save :display_reminder_notification, on: [:create, :update], if: lambda { |task| task.reminder_changed? && task.open && task.reminder.present? }
+
+
+  def reminder=(val)
+    reminder_will_change! unless (val == nil && DateTime.parse(val).to_i == reminder.to_i)
+    self[:reminder] = val
+  end
 
   def send_reminder_email
-    	SendMail.perform_at(reminder, { id: self.id, updated_at: self.updated_at }, 'reminder_email') if reminder.to_i > DateTime.now.to_i
+    	SendMail.perform_at(reminder, { id: self.id, reminder: self.reminder }, 'reminder_email')
   end
 
   def display_reminder_notification
-    DisplayNotif.perform_at(reminder, self.id, self.updated_at) if reminder.to_i > DateTime.now.to_i
+    DisplayNotif.perform_at(reminder, self.id, self.reminder)
   end
 
   def self.as_csv
@@ -29,7 +39,7 @@ class Task < ActiveRecord::Base
     CSV.generate(headers: true) do |csv|
       csv << columns.collect(&:capitalize)
       all.each do |task|
-        csv << task.attributes.values_at(*columns)
+        csv << [task.title, task.description, (task.deadline.strftime('%I:%M %p on %b %d %Y') if task.deadline.present?), task.open]
       end
     end
   end

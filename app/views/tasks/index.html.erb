@@ -18,7 +18,7 @@
 			<ol class="tasks">
 				<%= render @open_tasks %>
 			</ol>
-			<%= will_paginate @open_tasks %>
+			<%= will_paginate @open_tasks, previous_label: "Previous", next_label: "Next" %>
 		<% end %>
 	</aside>
 	<div class="col-md-6">

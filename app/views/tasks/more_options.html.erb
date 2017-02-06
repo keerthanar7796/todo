@@ -8,6 +8,6 @@
 		<%= link_to "Email all tasks as XML", mail_xml_tasks_path, class: "btn btn-primary btn-xl" %>
 	</div>
 	<div class="col-md-12 center">
-		<%= link_to "Delete account", user_path, method: :delete, data: { confirm: "All your tasks will be deleted on account deletion. Do you want to continue?" }, class: "btn btn-primary btn-xl delete_button" %>
+		<%= link_to "Delete account", user_path(current_user), method: :delete, data: { confirm: "All your tasks will be deleted on account deletion. Do you want to continue?" }, class: "btn btn-primary btn-xl delete_button" %>
 	</div>
 </div>

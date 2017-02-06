@@ -9,7 +9,7 @@ class UserMailer < ActionMailer::Base
 
 	def reminder_email(task)
 		@task = Task.find_by_id(task["id"])
-		if task["updated_at"].to_datetime.to_i != @task.updated_at.to_i
+		if task["reminder"].to_datetime.to_i != @task.reminder.to_i
   			return
   		end
 		@user = User.find_by_id(@task.user_id)

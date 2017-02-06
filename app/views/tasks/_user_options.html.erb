@@ -1,8 +1,8 @@
-<button class="btn btn-primary dropdown options_menu">
+	<button class="btn btn-primary dropdown options_menu">
 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Options <b class="caret"></b></a>
 	<ul class="dropdown-menu">
 		<li><%= link_to "Add task...", addtask_path %></li>
-		<li><%= link_to "Edit profile", edit_user_path %></li>
-		<li><%= link_to "More..", more_options_user_path %></li>
+		<li><%= link_to "Edit profile", edit_user_path(current_user) %></li>
+		<li><%= link_to "More..", more_options_tasks_path %></li>
 	</ul>
 </button>
